@@ -1,11 +1,11 @@
-@extends('layouts.app', ['title' => __('Создать дело')])
+@extends('layouts.app', ['title' => __('Изменить дело')])
 
 @section('content')
     <div class="container">
         <main>
             <div class="row g-5 justify-content-center">
                 <div class="col-md-7 col-lg-6">
-                    <h4 class="mb-5 ">{{ __('Создать дело') }}</h4>
+                    <h4 class="mb-5 ">{{ __('Изменить дело') }}</h4>
                     <form action="{{ route(\App\Http\Controllers\Api\TodoController::ROUTE_CREATE) }}" method="post" autocomplete="off" enctype="multipart/form-data" class="needs-validation">
                         @method('post')
                         @csrf
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <hr class="my-4">
-                        <button class="w-100 btn btn-primary btn-lg" type="submit">{{ __('Создать дело') }}</button>
+                        <button class="w-100 btn btn-primary btn-lg" type="submit">{{ __('Изменить дело') }}</button>
                     </form>
                 </div>
             </div>

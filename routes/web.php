@@ -28,5 +28,6 @@ Route::group(
         Route::get('/',             [PublicController::class, 'index']  )->name(PublicController::ROUTE_MAIN);
         Route::get('/logout',       [AuthController::class, 'logout']   )->name(AuthController::ROUTE_LOGOUT);
         Route::get('/createTodo',   [TodoController::class, 'create']   )->name(TodoController::ROUTE_CREATE);
+        Route::get('/change/{id}',  [TodoController::class, 'change']   )->name(TodoController::ROUTE_CHANGE);
     }
 );

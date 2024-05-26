@@ -15,4 +15,5 @@ use App\Http\Controllers\Api\TodoController;
 |
 */
 
-Route::post('/create',  [TodoController::class, 'create']   )->name(TodoController::ROUTE_CREATE);
+Route::post('/create',      [TodoController::class, 'create']   )->name(TodoController::ROUTE_CREATE);
+Route::get('/delete/{id}',  [TodoController::class, 'delete']   )->name(TodoController::ROUTE_DELETE);

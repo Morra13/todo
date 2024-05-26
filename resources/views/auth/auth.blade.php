@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <form class="w-25" method="post" autocomplete="off" enctype="multipart/form-data" action="{{ route(\App\Http\Controllers\Auth\AuthController::ROUTE_AUTH) }}">
+        <form class="w-25" method="post" enctype="multipart/form-data" action="{{ route(\App\Http\Controllers\Auth\AuthController::ROUTE_AUTH) }}">
             @method('post')
             @csrf
             <h1 class="h3 mb-3 fw-normal">{{ __('Авторизация') }}</h1>
