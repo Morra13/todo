@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tags;
+use App\Models\Todo;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
@@ -25,7 +27,17 @@ class PublicController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $arTodo = (new Todo())->where('userId', auth()->id())->get();
+
+        foreach ($arTodo as $key => $value) {
+            $arTags = (new Tags())->where('todoId', $value['id'])->get();
+            foreach ($arTags as $arTag) {
+                $tags[$key][] = ['tag' => $arTag->tag];
+            }
+            $arTodo[$key]['tags'] = $tags[$key] ?? null;
+        }
+
+        return view('index', ['arTodo' => $arTodo]);
     }
 
     /**

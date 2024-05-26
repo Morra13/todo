@@ -2,6 +2,8 @@
 
 @section('content')
     @if(Auth::user())
-        @include('todo.todoRow', ['id', Auth::user()->id])
+        @foreach($arTodo as $todo)
+            @include('todo.todoRow', ['todo' => $todo])
+        @endforeach
     @endif
 @endsection

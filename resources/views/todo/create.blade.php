@@ -35,13 +35,16 @@
                             </div>
                             <div id="wrapper" class="col-12">
                                 <label for="tag_0" class="form-label">{{ __('Теги') }}</label>
-                                <div id="divTag" class="input-group mb-3">
+                                <div id="divTag_0" class="input-group mb-3">
                                     <span class="input-group-text">#</span>
                                     <input type="text" class="form-control" id="tag_0" name="tag_0" placeholder="{{ __('Тег') }}">
+                                    <button type="button" class="input-group-text bg-danger d-none" id="buttonDeleteTag_0" value="divTag_0" onclick="deleteTag(this)">-</button>
                                     <button type="button" class="input-group-text bg-primary" onclick="addTag()">+</button>
+                                    <input type="hidden" id="count" name="count" value="0">
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" id="userId" name="userId" value="{{ auth()->id() }}">
                         <hr class="my-4">
                         <button class="w-100 btn btn-primary btn-lg" type="submit">{{ __('Создать дело') }}</button>
                     </form>
