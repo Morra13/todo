@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Access;
 use App\Models\Tags;
 use App\Models\Todo;
 use Illuminate\Http\Request;
@@ -94,8 +95,25 @@ class TodoController extends Controller
         return redirect( route(\App\Http\Controllers\PublicController::ROUTE_MAIN));
     }
 
+    /**
+     * Delete "todo"
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function delete($id)
     {
-        dd($id);
+        $obTodo = (new Todo())->where('id', $id)->first();
+        $sFileImgPath = storage_path('app/public/' . $obTodo['img']);
+        if (file_exists($sFileImgPath)) {
+            if (!empty($obTodo['img'])) {
+                unlink($sFileImgPath);
+            }
+        }
+        $obTodo->delete();
+        (new Tags())->where('todoId', $id)->delete();
+//        (new Access())->where('todoId', $id)->delete();
+
+        return redirect( route(\App\Http\Controllers\PublicController::ROUTE_MAIN));
     }
 }

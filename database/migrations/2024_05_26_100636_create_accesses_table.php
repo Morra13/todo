@@ -13,7 +13,7 @@ class CreateAccessesTable extends Migration
      */
     public function up()
     {
-        Schema::create('accesses', function (Blueprint $table) {
+        Schema::create('access', function (Blueprint $table) {
             $table->id();
             $table->smallInteger('todoId');
             $table->smallInteger('todoUserId');
@@ -29,6 +29,6 @@ class CreateAccessesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accesses');
+        Schema::dropIfExists('access');
     }
 }
