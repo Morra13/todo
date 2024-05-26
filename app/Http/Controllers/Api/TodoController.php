@@ -53,11 +53,45 @@ class TodoController extends Controller
         return redirect( route(\App\Http\Controllers\TodoController::ROUTE_CREATE));
     }
 
-
+    /**
+     * "Todo" update
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(Request $request)
     {
-        $obTodo = (new Todo())->where('id', (int)$request->get('id'))->first();
-        dd($obTodo);
+        $obTodo = (new Todo())->where('id', (int)$request->get('todoId'))->first();
+        $obTodo->name   = $request->get('name');
+        $obTodo->text   = $request->get('text');
+        if (!empty($request->file())){
+            $sFileImgPath = storage_path('app/public/' . $obTodo['img']);
+            if (file_exists($sFileImgPath)) {
+                if (!empty($obTodo['img'])) {
+                    unlink($sFileImgPath);
+                }
+            }
+            $fileName       = time().'_'.str_replace(' ', '', $request->file('img')->getClientOriginalName());
+            $filePath       = $request->file('img')->storeAs('/uploads', $fileName , 'public');
+            $obTodo->img    = $filePath;
+        }
+        $obTodo->update();
+
+        (new Tags())->where('todoId', (int)$request->get('todoId'))->delete();
+
+        $i = 0;
+        while ($i <= $request->get('count')):
+            if (!empty($request->get('tag_'.$i))) {
+                $obTag = new Tags();
+                $obTag->todoId  = (int)$request->get('todoId');
+                $obTag->userId  = (int)$obTodo->userId;
+                $obTag->tag     = $request->get('tag_'.$i);
+                $obTag->save();
+            }
+            $i++;
+        endwhile;
+
+        return redirect( route(\App\Http\Controllers\PublicController::ROUTE_MAIN));
     }
 
     public function delete($id)

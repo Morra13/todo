@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Tags;
+use App\Models\Todo;
 
 class TodoController extends Controller
 {
@@ -29,6 +30,21 @@ class TodoController extends Controller
      */
     public function change($id)
     {
-        return view('todo.change');
+        $arTag = [];
+
+        $arTodo = (new Todo())->where('id', $id)->first();
+        $arTags = (new Tags())->where('todoId', $id)->get();
+
+        if (!empty($arTags)) {
+            foreach ($arTags as $key => $value) {
+                $arTag[$key] = [
+                    "id"    => $value->id,
+                    "tag"   => $value->tag,
+                ];
+            }
+            $arTodo['tags'] = $arTag;
+        }
+
+        return view('todo.change', ['arTodo' => $arTodo]);
     }
 }

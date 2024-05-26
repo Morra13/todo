@@ -34,13 +34,20 @@
                                 <input type="text" class="form-control" id="text" name="text" placeholder="{{ __('Текст') }}">
                             </div>
                             <div id="wrapper" class="col-12">
-                                <label for="tag_0" class="form-label">{{ __('Теги') }}</label>
+                                <label for="tag_0" class="form-label d-flex justify-content-between text-align-center align-items-center">
+                                    {{ __('Теги') }}
+                                    <button type="button" class="input-group-text bg-primary" onclick="addTag()">+</button>
+                                </label>
+                                <input type="hidden" id="count" name="count" value="0">
+                                <div id="divTag" class="input-group mb-3 d-none">
+                                    <span class="input-group-text">#</span>
+                                    <input type="text" class="form-control" id="tag" name="tag" placeholder="{{ __('Тег') }}">
+                                    <button type="button" class="input-group-text bg-danger" id="buttonDeleteTag" value="divTag" onclick="deleteTag(this)">-</button>
+                                </div>
                                 <div id="divTag_0" class="input-group mb-3">
                                     <span class="input-group-text">#</span>
                                     <input type="text" class="form-control" id="tag_0" name="tag_0" placeholder="{{ __('Тег') }}">
-                                    <button type="button" class="input-group-text bg-danger d-none" id="buttonDeleteTag_0" value="divTag_0" onclick="deleteTag(this)">-</button>
-                                    <button type="button" class="input-group-text bg-primary" onclick="addTag()">+</button>
-                                    <input type="hidden" id="count" name="count" value="0">
+                                    <button type="button" class="input-group-text bg-danger" id="buttonDeleteTag_0" value="divTag_0" onclick="deleteTag(this)">-</button>
                                 </div>
                             </div>
                         </div>
