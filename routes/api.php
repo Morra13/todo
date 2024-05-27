@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TodoController;
+use App\Http\Controllers\Api\AccessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +15,8 @@ use App\Http\Controllers\Api\TodoController;
 |
 */
 
-Route::post('/create',      [TodoController::class, 'create']   )->name(TodoController::ROUTE_CREATE);
-Route::post('/update',      [TodoController::class, 'update']   )->name(TodoController::ROUTE_UPDATE);
-Route::get('/delete/{id}',  [TodoController::class, 'delete']   )->name(TodoController::ROUTE_DELETE);
+Route::post('/create',                          [TodoController::class, 'create']           )->name(TodoController::ROUTE_CREATE);
+Route::post('/update',                          [TodoController::class, 'update']           )->name(TodoController::ROUTE_UPDATE);
+Route::get('/delete/{id}',                      [TodoController::class, 'delete']           )->name(TodoController::ROUTE_DELETE);
+Route::post('/addAccess',                       [AccessController::class, 'addAccess']      )->name(AccessController::ROUTE_ADD_ACCESS);
+Route::get('/deleteAccess/{userId}/{todoId}',   [AccessController::class, 'deleteAccess']   )->name(AccessController::ROUTE_DELETE_ACCESS);

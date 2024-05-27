@@ -13,6 +13,11 @@
                     @else
                         <li><a href="{{ route(\App\Http\Controllers\TodoController::ROUTE_CREATE) }}" class="nav-link px-2 text-white">{{ __('Создать дело') }}</a></li>
                     @endif
+                    @if(substr(\Request::getRequestUri(),1) == 'myAccess')
+                        <li><a href="{{ route(\App\Http\Controllers\AccessController::ROUTE_MY_ACCESS) }}" class="nav-link px-2">{{ __('Мои доступы') }}</a></li>
+                    @else
+                        <li><a href="{{ route(\App\Http\Controllers\AccessController::ROUTE_MY_ACCESS) }}" class="nav-link px-2 text-white">{{ __('Мои доступы') }}</a></li>
+                    @endif
                 </ul>
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                     <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">

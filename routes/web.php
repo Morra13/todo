@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\AccessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,11 @@ Route::post('/register',    [AuthController::class, 'register']     )->name(Auth
 Route::group(
     ['middleware' => 'auth'],
     function () {
-        Route::get('/',             [PublicController::class, 'index']  )->name(PublicController::ROUTE_MAIN);
-        Route::get('/logout',       [AuthController::class, 'logout']   )->name(AuthController::ROUTE_LOGOUT);
-        Route::get('/createTodo',   [TodoController::class, 'create']   )->name(TodoController::ROUTE_CREATE);
-        Route::get('/change/{id}',  [TodoController::class, 'change']   )->name(TodoController::ROUTE_CHANGE);
+        Route::get('/',                 [PublicController::class, 'index']      )->name(PublicController::ROUTE_MAIN);
+        Route::get('/logout',           [AuthController::class, 'logout']       )->name(AuthController::ROUTE_LOGOUT);
+        Route::get('/createTodo',       [TodoController::class, 'create']       )->name(TodoController::ROUTE_CREATE);
+        Route::get('/change/{id}',      [TodoController::class, 'change']       )->name(TodoController::ROUTE_CHANGE);
+        Route::get('/addAccess/{id}',   [AccessController::class, 'addAccess']  )->name(AccessController::ROUTE_ADD_ACCESS);
+        Route::get('/myAccess',         [AccessController::class, 'myAccess']   )->name(AccessController::ROUTE_MY_ACCESS);
     }
 );

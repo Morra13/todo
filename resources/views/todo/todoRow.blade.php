@@ -9,6 +9,7 @@
                 @endforeach
             @endif
             <div class="d-flex justify-content-end gap-4 mb-2">
+                <a href="{{ route(\App\Http\Controllers\AccessController::ROUTE_ADD_ACCESS, $todo->id) }}" class="btn btn-outline-warning">Дать доступ</a>
                 <a href="{{ route(\App\Http\Controllers\Api\TodoController::ROUTE_DELETE, $todo->id) }}" class="btn btn-outline-danger">Удалить</a>
                 <a href="{{ route(\App\Http\Controllers\TodoController::ROUTE_CHANGE, $todo->id) }}" class="btn btn-primary">Редактировать</a>
             </div>

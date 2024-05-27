@@ -58,6 +58,7 @@
                         <input type="hidden" id="todoId" name="todoId" value="{{ $arTodo['id'] }}">
                         <hr class="my-4">
                         <div class="d-flex gap-4">
+                            <a href="{{ route(\App\Http\Controllers\AccessController::ROUTE_ADD_ACCESS, $arTodo->id) }}" class="w-100 btn btn-warning btn-lg" type="submit">{{ __('Дать доступ') }}</a>
                             <a href="{{ route(\App\Http\Controllers\Api\TodoController::ROUTE_DELETE, $arTodo->id) }}" class="w-100 btn btn-danger btn-lg" type="submit">{{ __('Удалить') }}</a>
                             <button class="w-100 btn btn-primary btn-lg" type="submit">{{ __('Измениь дело') }}</button>
                         </div>
