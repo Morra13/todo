@@ -65,8 +65,14 @@ class TodoController extends Controller
         $obTodo = (new Todo())->where('id', (int)$request->get('todoId'))->first();
         $obTodo->name   = $request->get('name');
         $obTodo->text   = $request->get('text');
-        if (!empty($request->file())){
-            $sFileImgPath = storage_path('app/public/' . $obTodo['img']);
+        $sFileImgPath = storage_path('app/public/' . $obTodo['img']);
+        if ($request->file()['img']->getClientOriginalName() == 'delete') {
+            if (!empty($obTodo['img'])) {
+                unlink($sFileImgPath);
+            }
+            $obTodo->img = null;
+        }
+        if (!empty($request->file()) && $request->file()['img']->getClientOriginalName() != 'delete'){
             if (file_exists($sFileImgPath)) {
                 if (!empty($obTodo['img'])) {
                     unlink($sFileImgPath);
@@ -112,7 +118,7 @@ class TodoController extends Controller
         }
         $obTodo->delete();
         (new Tags())->where('todoId', $id)->delete();
-//        (new Access())->where('todoId', $id)->delete();
+        (new Access())->where('todoId', $id)->delete();
 
         return redirect( route(\App\Http\Controllers\PublicController::ROUTE_MAIN));
     }

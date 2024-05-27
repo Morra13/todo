@@ -23,6 +23,7 @@
                                         onchange="document.getElementById('img').src = window.URL.createObjectURL(this.files[0])"
                                         accept=".jpg,.jpeg,.png"
                                     />
+                                    <button class="btn btn-danger rounded-circle p-3 lh-1" type="button" onclick="deleteImg()">X</button>
                                 </div>
                                 <div class="col-sm-8">
                                     <label for="name" class="form-label">{{ __('Название дела') }}</label>

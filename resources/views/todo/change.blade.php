@@ -15,6 +15,7 @@
                                     <label for="chooseFile">
                                         <img width="150px" height="150px" id="img" src="{{ asset('storage') . '/' . ($arTodo['img'] ?? 'uploads/defaultUploadImg.png') }}" alt="img">
                                     </label>
+                                    <button class="btn btn-danger rounded-circle p-3 lh-1" type="button" onclick="deleteImg()">X</button>
                                     <input
                                         id="chooseFile"
                                         name="img"
