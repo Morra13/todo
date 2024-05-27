@@ -8,6 +8,13 @@
                     <span class="badge rounded-pill text-bg-info"> {{ "#" . $tag['tag'] }}</span>
                 @endforeach
             @endif
+            <div>
+                @if($todo['access'])
+                    @foreach($todo['access'] as $access)
+                        <span class="badge rounded-pill text-bg-warning"> {{ $access['name'] }}</span>
+                    @endforeach
+                @endif
+            </div>
             <div class="d-flex justify-content-end gap-4 mb-2">
                 <a href="{{ route(\App\Http\Controllers\AccessController::ROUTE_ADD_ACCESS, $todo->id) }}" class="btn btn-outline-warning">Дать доступ</a>
                 <a href="{{ route(\App\Http\Controllers\Api\TodoController::ROUTE_DELETE, $todo->id) }}" class="btn btn-outline-danger">Удалить</a>

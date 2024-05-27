@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Access;
 use App\Models\Tags;
 use App\Models\Todo;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
@@ -35,6 +37,14 @@ class PublicController extends Controller
                 $tags[$key][] = ['tag' => $arTag->tag];
             }
             $arTodo[$key]['tags'] = $tags[$key] ?? null;
+            $obAccess = (new Access())->where('todoId', $value['id'])->get();
+            foreach ($obAccess as $arAccess) {
+                $user = (new User())->where('id', $arAccess->userId)->first();
+                $access[$key][] = [
+                    'name' => $user->name,
+                ];
+            }
+            $arTodo[$key]['access'] = $access[$key] ?? null;
         }
 
         return view('index', ['arTodo' => $arTodo]);
