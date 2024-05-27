@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Access;
+use App\Models\Tags;
 use App\Models\Todo;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class AccessController extends Controller
     const ROUTE_MY_ACCESS = 'myAccess';
 
     /**
-     * Дать доступы
+     * Add access
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
@@ -48,8 +49,27 @@ class AccessController extends Controller
         ]);
     }
 
+    /**
+     * "Todo" available to me
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function myAccess()
     {
-        return view('access.myAccess');
+        $arAccess = (new Access())->where('userId', auth()->id())->get(['todoId', 'userId', 'type']);
+
+        foreach ($arAccess as $key => $access) {
+            $arTodo[$key] = (new Todo())->where('id', $access->todoId)->first();
+            $arTodo[$key]['type'] = $access->type;
+        }
+        foreach ($arTodo as $key => $value) {
+            $arTags = (new Tags())->where('todoId', $value['id'])->get();
+            foreach ($arTags as $arTag) {
+                $tags[$key][] = ['tag' => $arTag->tag];
+            }
+            $arTodo[$key]['tags'] = $tags[$key] ?? null;
+        }
+
+        return view('access.myAccess', ['arTodo' => $arTodo]);
     }
 }

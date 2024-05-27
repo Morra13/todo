@@ -25,7 +25,8 @@ class AccessController extends Controller
         $obAccess = (new Access())
             ->where('todoId', $request->get('todoId'))
             ->where('userId', $request->get('userId'))
-            ->first();
+            ->first()
+        ;
         if ($obAccess) {
             $obAccess->type = $request->get('type');
             $obAccess->update();
@@ -46,7 +47,7 @@ class AccessController extends Controller
      *
      * @param $userId
      * @param $todoId
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function deleteAccess($userId, $todoId)
     {
@@ -56,6 +57,6 @@ class AccessController extends Controller
             ->delete()
         ;
 
-        return redirect( route(\App\Http\Controllers\AccessController::ROUTE_ADD_ACCESS, $todoId));
+        return redirect()->back();
     }
 }
