@@ -6,7 +6,7 @@
     <form action="{{ route(\App\Http\Controllers\PublicController::ROUTE_MAIN) }}" method="get" autocomplete="off" enctype="multipart/form-data" class="needs-validation mb-5" role="search">
         @method('get')
         @csrf
-        <input type="search" class="form-control form-control-dark text-bg-dark mb-2" aria-label="Search" id="search" name="search">
+        <input type="search" class="form-control form-control-dark text-bg-dark mb-2" aria-label="Search" id="search" name="search" required>
         <div class="d-flex gap-2 justify-content-center">
             <a href="{{ route(\App\Http\Controllers\PublicController::ROUTE_MAIN) }}" type="submit" class="btn btn-warning ">{{ __('Сросить') }}</a>
             <button type="submit" class="btn btn-primary">{{ __('Поиск') }}</button>
