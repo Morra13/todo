@@ -19,9 +19,6 @@
                         <li><a href="{{ route(\App\Http\Controllers\AccessController::ROUTE_MY_ACCESS) }}" class="nav-link px-2 text-white">{{ __('Мои доступы') }}</a></li>
                     @endif
                 </ul>
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-                </form>
                 <div class="text-end">
                     <a href="{{ route(\App\Http\Controllers\Auth\AuthController::ROUTE_LOGOUT) }}" type="button" class="btn btn-warning">{{ __('Выйти') }}</a>
                 </div>

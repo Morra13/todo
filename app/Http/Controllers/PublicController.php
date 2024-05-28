@@ -25,12 +25,33 @@ class PublicController extends Controller
     /**
      * Index
      *
+     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $arTodo = (new Todo())->where('userId', auth()->id())->get();
-
+        foreach ($arTodo as $value) {
+            $arAllTags = (new Tags())->where('todoId', $value['id'])->get(['todoId' ,'tag']);
+            foreach ($arAllTags as $value) {
+                $arAvailableTags[] = [$value['todoId'] => $value['tag']];
+            }
+        }
+        if (!empty($request->request->get('search'))) {
+            unset($arTodo);
+            $arTodo[] = (new Todo())->where('name', $request->request->get('search'))->first();
+        }
+        if (count($request->request) > 2 && empty($request->request->get('search')) ) {
+            unset($arTodo);
+            $request->request->remove('_method');
+            $request->request->remove('_token');
+            foreach ($request->request as $value) {
+                $arTodoIdForFilter[] = $value;
+            }
+            foreach (array_unique($arTodoIdForFilter) as $todoId) {
+                $arTodo[] = (new Todo())->where('id', $todoId)->first();
+            }
+        }
         foreach ($arTodo as $key => $value) {
             $arTags = (new Tags())->where('todoId', $value['id'])->get();
             foreach ($arTags as $arTag) {
@@ -47,7 +68,10 @@ class PublicController extends Controller
             $arTodo[$key]['access'] = $access[$key] ?? null;
         }
 
-        return view('index', ['arTodo' => $arTodo]);
+        return view('index', [
+            'arTodo' => $arTodo,
+            'arAvailableTags' => $arAvailableTags,
+        ]);
     }
 
     /**

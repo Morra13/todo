@@ -66,11 +66,13 @@ class TodoController extends Controller
         $obTodo->name   = $request->get('name');
         $obTodo->text   = $request->get('text');
         $sFileImgPath = storage_path('app/public/' . $obTodo['img']);
-        if ($request->file()['img']->getClientOriginalName() == 'delete') {
-            if (!empty($obTodo['img'])) {
-                unlink($sFileImgPath);
+        if (!empty($request->file()['img'])) {
+            if ($request->file()['img']->getClientOriginalName() == 'delete') {
+                if (!empty($obTodo['img'])) {
+                    unlink($sFileImgPath);
+                }
+                $obTodo->img = null;
             }
-            $obTodo->img = null;
         }
         if (!empty($request->file()) && $request->file()['img']->getClientOriginalName() != 'delete'){
             if (file_exists($sFileImgPath)) {
