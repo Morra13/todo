@@ -19,4 +19,4 @@ Route::post('/create',                          [TodoController::class, 'create'
 Route::post('/update',                          [TodoController::class, 'update']           )->name(TodoController::ROUTE_UPDATE);
 Route::get('/delete/{id}',                      [TodoController::class, 'delete']           )->name(TodoController::ROUTE_DELETE);
 Route::post('/addAccess',                       [AccessController::class, 'addAccess']      )->name(AccessController::ROUTE_ADD_ACCESS);
-Route::post('/deleteAccess/{userId}/{todoId}',   [AccessController::class, 'deleteAccess']   )->name(AccessController::ROUTE_DELETE_ACCESS);
+Route::post('/deleteAccess/{userId}/{todoId}',  [AccessController::class, 'deleteAccess']   )->name(AccessController::ROUTE_DELETE_ACCESS);

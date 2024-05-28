@@ -15,6 +15,7 @@
     <script defer src="{{asset('storage')}}/js/deleteTag.js?{{time()}}"></script>
     <script defer src="{{asset('storage')}}/js/deleteImg.js?{{time()}}"></script>
     <script defer src="{{asset('storage')}}/js/accessAjax.js?{{time()}}"></script>
+    <script defer src="{{asset('storage')}}/js/todoAjax.js?{{time()}}"></script>
 </head>
 <body class="page container">
     @include('layouts.header')
