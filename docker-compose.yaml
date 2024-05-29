@@ -52,6 +52,7 @@ services:
         volumes:
             - dbdata:/var/lib/mysql
            #- "var/run/mysqld:var/run/mysqld"
+            - "./config/mysql/enable-mysql-native-password.cnf:/etc/mysql/conf.d/enable-mysql-native-password.cnf"
             - "./config/mysql/my.cnf:/etc/mysql/my.cnf"
 
 #Docker Networks
