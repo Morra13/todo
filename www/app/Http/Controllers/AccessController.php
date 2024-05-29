@@ -56,6 +56,7 @@ class AccessController extends Controller
      */
     public function myAccess()
     {
+        $arTodo = [];
         $arAccess = (new Access())->where('userId', auth()->id())->get(['todoId', 'userId', 'type']);
 
         foreach ($arAccess as $key => $access) {

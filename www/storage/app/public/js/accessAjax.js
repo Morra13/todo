@@ -1,3 +1,8 @@
+/**
+ * Create access by ajax
+ *
+ * @param url
+ */
 function accessAjax (url) {
     $('#formAddAccess').submit(function (){
         let data = $(this).serialize();

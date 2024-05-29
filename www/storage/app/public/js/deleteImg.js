@@ -1,3 +1,6 @@
+/**
+ * Delete img
+ */
 function deleteImg() {
     let loc = window.location.pathname.split('/');
     if (loc[1] == 'change') {

@@ -1,3 +1,8 @@
+/**
+ * Create "todo" by ajax
+ *
+ * @param url
+ */
 function todoAjax (url) {
     $('#formCreateTodo').submit(function (){
         let formData = new FormData(this);
@@ -21,6 +26,11 @@ function todoAjax (url) {
     })
 }
 
+/**
+ * Delete "todo" by ajax
+ *
+ * @param url
+ */
 function deleteTodoAjax (url) {
     $('#formDeleteTodo').click(function (e){
         let data = $(this).serialize();

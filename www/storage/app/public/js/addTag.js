@@ -1,3 +1,6 @@
+/**
+ * Add tag block
+ */
 function addTag() {
     const wrapper = document.querySelector('#wrapper');
     const divTag = document.querySelector('#divTag');

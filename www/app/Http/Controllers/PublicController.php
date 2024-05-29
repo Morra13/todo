@@ -70,7 +70,7 @@ class PublicController extends Controller
 
         return view('index', [
             'arTodo' => $arTodo,
-            'arAvailableTags' => $arAvailableTags,
+            'arAvailableTags' => $arAvailableTags ?? [],
         ]);
     }
 
