@@ -20,3 +20,19 @@ function todoAjax (url) {
         return false;
     })
 }
+
+function deleteTodoAjax (url) {
+    $('#formDeleteTodo').click(function (e){
+        let data = $(this).serialize();
+        $.ajax({
+            type: 'post',
+            url: url.value,
+            data: data,
+            dataType: 'html',
+            success : function(response) {
+                $('#wrapper')[0].replaceWith($(response).children('.col-12').children('.col-9')[0]) ;
+            }
+        })
+        return false;
+    })
+}
