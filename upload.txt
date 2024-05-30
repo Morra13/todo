@@ -1,0 +1,20 @@
+    • Арендуем облачный сервер получаем данные ( user / ip )
+    • Арендуем домен у хостера
+    • прописываем DNS-серверы в панели управления хостера http://joxi.ru/VrwjEJGUv44LgA
+    • в моем случае данные беру из https://www.cloudflare.com/ | http://joxi.ru/Rmz6EMjCGMMg0m
+    • Настраиваем A ресурсы http://joxi.ru/Y2Lxzo1UeEEPB2
+    • Создаем сертификат SSL http://joxi.ru/a2X0zojUZ44BN2
+    • shh user@ip | подключаемся к серверу по ssh | http://joxi.ru/a2X0zojUZ44OL2
+    • прописываем ssl_certificate и ssl_certificate_key по пути указанному в config/nginx/cronf.d/public.conf | http://joxi.ru/Dr8wR7zTnMM8zA
+    • apt install docker-compose | устанавливаем docker-compose
+    • Клонируем git репозиторий на сервер | git-clone https://github.com/Morra13/todo.git
+    • прописываем файлы .env из .env.example
+    • Поднимаем докер | docker-compose up -d
+    • заходим в докер контейнер "CORE_MYSQL" | docker exec -it CORE_MYSQL bash || mysql -u root -p | (пароль берем из "docker-compose.yaml" MYSQL_ROOT_PASSWORD:)
+    • создаем базу где будем хранить данные | CREATE DATABASE name;
+    • создаем пользователя + даем права на таблицу
+        - CREATE USER ‘user’@’%’ IDENTIFIED BY ‘password’;
+        - GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;
+    • прописываем / DB_DATABASE / DB_USERNAME / DB_PASSWORD в .env | http://joxi.ru/MAjkEansZkkbNr
+    • заходим в докер контейнер "CORE_PHP" | docker exec -it CORE_PHP bash | установим пакеты | composer update
+    • заходим в докер контейнер "CORE_PHP" | docker exec -it CORE_PHP bash | запускаем команду | php artisan migrate

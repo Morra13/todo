@@ -56,7 +56,7 @@
                                     @foreach($arTodo['tasks'] as $key => $task)
                                         <div id="{{ "divTask_" . $key }}" class="input-group mb-3">
                                             <div class="btn-group me-2" role="group" aria-label="First group">
-                                                <input type="radio" class="btn-check input-group-text" name="taskStatus_{{ $key }}" id="vbtn-radio1" autocomplete="off" value="expect" @if($task['status'] == 'except') checked @endif>
+                                                <input type="radio" class="btn-check input-group-text" name="taskStatus_{{ $key }}" id="vbtn-radio1" autocomplete="off" value="expect" @if($task['status'] == 'expect') checked @endif>
                                                 <label class="btn btn-outline-secondary" for="vbtn-radio1" title="{{ __('В ожидании') }}"></label>
                                                 <input type="radio" class="btn-check input-group-text" name="taskStatus_{{ $key }}" id="vbtn-radio2" autocomplete="off" value="work" @if($task['status'] == 'work') checked @endif>
                                                 <label class="btn btn-outline-primary" for="vbtn-radio2" title="{{ __('В работе') }}"></label>
