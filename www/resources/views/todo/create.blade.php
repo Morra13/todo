@@ -33,12 +33,29 @@
                             <label for="text" class="form-label">{{ __('Текст') }}  </label>
                             <input type="text" class="form-control" id="text" name="text" placeholder="{{ __('Текст') }}" required>
                         </div>
-                        <div id="wrapper" class="col-12">
+                        <div id="wrapperTask" class="col-12">
+                            <label for="task_0" class="form-label d-flex justify-content-between text-align-center align-items-center">
+                                {{ __('Задачи') }}
+                                <button type="button" class="input-group-text bg-primary" onclick="addTask()">+</button>
+                            </label>
+                            <input type="hidden" id="countTask" name="countTask" value="0">
+                            <div id="divTask" class="input-group mb-3 d-none">
+                                <span class="input-group-text"></span>
+                                <input type="text" class="form-control" id="task" name="task" placeholder="{{ __('Задача') }}">
+                                <button type="button" class="input-group-text bg-danger" id="buttonDeleteTask" value="divTask" onclick="deleteTask(this)">-</button>
+                            </div>
+                            <div id="divTask_0" class="input-group mb-3">
+                                <span class="input-group-text"></span>
+                                <input type="text" class="form-control" id="task_0" name="task_0" placeholder="{{ __('Задача') }}">
+                                <button type="button" class="input-group-text bg-danger" id="buttonDeleteTask_0" value="divTask_0" onclick="deleteTask(this)">-</button>
+                            </div>
+                        </div>
+                        <div id="wrapperTag" class="col-12">
                             <label for="tag_0" class="form-label d-flex justify-content-between text-align-center align-items-center">
                                 {{ __('Теги') }}
                                 <button type="button" class="input-group-text bg-primary" onclick="addTag()">+</button>
                             </label>
-                            <input type="hidden" id="count" name="count" value="0">
+                            <input type="hidden" id="countTag" name="countTag" value="0">
                             <div id="divTag" class="input-group mb-3 d-none">
                                 <span class="input-group-text">#</span>
                                 <input type="text" class="form-control" id="tag" name="tag" placeholder="{{ __('Тег') }}">

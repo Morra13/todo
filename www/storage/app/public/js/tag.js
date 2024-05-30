@@ -2,9 +2,9 @@
  * Add tag block
  */
 function addTag() {
-    const wrapper = document.querySelector('#wrapper');
+    const wrapper = document.querySelector('#wrapperTag');
     const divTag = document.querySelector('#divTag');
-    let count = document.querySelector('#count');
+    let count = document.querySelector('#countTag');
     let i = ((count.value * 1) + 1);
     let createBlock = document.createElement('div');
 
@@ -19,4 +19,15 @@ function addTag() {
     i++;
 
     wrapper.append(createBlock);
+}
+
+/**
+ * Delete Tag
+ *
+ * @param btn
+ */
+function deleteTag (btn) {
+    let wrapper = document.querySelector('#wrapperTag');
+    let div = document.querySelector('#' + btn.value)
+    wrapper.removeChild(div);
 }

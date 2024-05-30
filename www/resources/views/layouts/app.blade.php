@@ -11,8 +11,8 @@
     <link rel="icon" href="{{asset('storage')}}/uploads/favicon.svg" type="image/svg+xml">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script defer src="{{asset('storage')}}/js/addTag.js?{{time()}}"></script>
-    <script defer src="{{asset('storage')}}/js/deleteTag.js?{{time()}}"></script>
+    <script defer src="{{asset('storage')}}/js/tag.js?{{time()}}"></script>
+    <script defer src="{{asset('storage')}}/js/task.js?{{time()}}"></script>
     <script defer src="{{asset('storage')}}/js/deleteImg.js?{{time()}}"></script>
     <script defer src="{{asset('storage')}}/js/accessAjax.js?{{time()}}"></script>
     <script defer src="{{asset('storage')}}/js/todoAjax.js?{{time()}}"></script>

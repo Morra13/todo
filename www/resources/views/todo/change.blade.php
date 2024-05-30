@@ -34,12 +34,47 @@
                                 <label for="text" class="form-label">{{ __('Текст') }}  </label>
                                 <input type="text" class="form-control" id="text" name="text" placeholder="{{ __('Текст') }}" value="{{ $arTodo['text'] }}">
                             </div>
-                            <div id="wrapper" class="col-12">
+                            <div id="wrapperTask" class="col-12">
+                                <label for="task_0" class="form-label d-flex justify-content-between text-align-center align-items-center">
+                                    {{ __('Задачи') }}
+                                    <button type="button" class="input-group-text bg-primary" onclick="addTask()">+</button>
+                                </label>
+                                <input type="hidden" id="countTasks" name="countTasks" value="{{ count($arTodo['tasks']) }}">
+                                <div id="divTask" class="input-group mb-3 d-none">
+                                    <div class="btn-group me-2" role="group" aria-label="First group">
+                                        <input type="radio" class="btn-check input-group-text" name="taskStatus" id="taskStatusExpect_" autocomplete="off" value="expect" checked>
+                                        <label class="btn btn-outline-secondary" for="taskStatusExpect_" title="{{ __('В ожидании') }}" id="taskLabelExpect_"></label>
+                                        <input type="radio" class="btn-check input-group-text" name="taskStatus" id="taskStatusWork_" autocomplete="off" value="work">
+                                        <label class="btn btn-outline-primary" for="taskStatusWork_" title="{{ __('В работе') }}" id="taskLabelWork_"></label>
+                                        <input type="radio" class="btn-check input-group-text" name="taskStatus" id="taskStatusCompleted_" autocomplete="off" value="completed">
+                                        <label class="btn btn-outline-success" for="taskStatusCompleted_" title="{{ __('В завершен') }}" id="taskLabelCompleted_"></label>
+                                    </div>
+                                    <input type="text" class="form-control" id="task_" name="task_" placeholder="{{ __('Задача') }}">
+                                    <button type="button" class="input-group-text bg-danger" id="buttonDeleteTask" value="divTask" onclick="deleteTask(this)">-</button>
+                                </div>
+                                @if($arTodo['tasks'])
+                                    @foreach($arTodo['tasks'] as $key => $task)
+                                        <div id="{{ "divTask_" . $key }}" class="input-group mb-3">
+                                            <div class="btn-group me-2" role="group" aria-label="First group">
+                                                <input type="radio" class="btn-check input-group-text" name="taskStatus_{{ $key }}" id="vbtn-radio1" autocomplete="off" value="expect" @if($task['status'] == 'except') checked @endif>
+                                                <label class="btn btn-outline-secondary" for="vbtn-radio1" title="{{ __('В ожидании') }}"></label>
+                                                <input type="radio" class="btn-check input-group-text" name="taskStatus_{{ $key }}" id="vbtn-radio2" autocomplete="off" value="work" @if($task['status'] == 'work') checked @endif>
+                                                <label class="btn btn-outline-primary" for="vbtn-radio2" title="{{ __('В работе') }}"></label>
+                                                <input type="radio" class="btn-check input-group-text" name="taskStatus_{{ $key }}" id="vbtn-radio3" autocomplete="off" value="completed" @if($task['status'] == 'completed') checked @endif>
+                                                <label class="btn btn-outline-success" for="vbtn-radio3" title="{{ __('В завершен') }}"></label>
+                                            </div>
+                                            <input type="text" class="form-control" id="{{ "task_" . $key }}" name="{{ "task_" . $key }}" placeholder="{{ __('Задача') }}" value="{{ $task['task'] }}">
+                                            <button type="button" class="input-group-text bg-danger" id="{{ "buttonDeleteTask_" . $key }}" value="{{ "divTask_" . $key }}" onclick="deleteTask(this)">-</button>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div id="wrapperTag" class="col-12">
                                 <label for="tag_0" class="form-label d-flex justify-content-between text-align-center align-items-center">
                                     {{ __('Теги') }}
                                     <button type="button" class="input-group-text bg-primary" onclick="addTag()">+</button>
                                 </label>
-                                <input type="hidden" id="count" name="count" value="{{ count($arTodo['tags']) }}">
+                                <input type="hidden" id="countTag" name="countTag" value="{{ count($arTodo['tags']) }}">
                                 <div id="divTag" class="input-group mb-3 d-none">
                                     <span class="input-group-text">#</span>
                                     <input type="text" class="form-control" id="tag" name="tag" placeholder="{{ __('Тег') }}">

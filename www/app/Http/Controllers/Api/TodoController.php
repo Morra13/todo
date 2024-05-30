@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Access;
 use App\Models\Tags;
+use App\Models\Tasks;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 
@@ -38,15 +39,24 @@ class TodoController extends Controller
             $obTodo->img    = $filePath;
         }
         $obTodo->save();
-
         $i = 0;
-        while ($i <= $request->get('count')):
+        while ($i <= $request->get('countTag')):
             if (!empty($request->get('tag_'.$i))) {
                 $obTag = new Tags();
                 $obTag->todoId  = $obTodo->id;
                 $obTag->userId  = (int)$request->get('userId');
                 $obTag->tag     = $request->get('tag_'.$i);
                 $obTag->save();
+            }
+            $i++;
+        endwhile;
+        $i = 0;
+        while ($i <= $request->get('countTask')):
+            if (!empty($request->get('task_'.$i))) {
+                $obTask = new Tasks();
+                $obTask->todoId  = $obTodo->id;
+                $obTask->task    = $request->get('task_'.$i);
+                $obTask->save();
             }
             $i++;
         endwhile;
@@ -87,15 +97,27 @@ class TodoController extends Controller
         $obTodo->update();
 
         (new Tags())->where('todoId', (int)$request->get('todoId'))->delete();
-
         $i = 0;
-        while ($i <= $request->get('count')):
+        while ($i <= $request->get('countTags')):
             if (!empty($request->get('tag_'.$i))) {
                 $obTag = new Tags();
                 $obTag->todoId  = (int)$request->get('todoId');
                 $obTag->userId  = (int)$obTodo->userId;
                 $obTag->tag     = $request->get('tag_'.$i);
                 $obTag->save();
+            }
+            $i++;
+        endwhile;
+
+        (new Tasks())->where('todoId', (int)$request->get('todoId'))->delete();
+        $i = 0;
+        while ($i <= $request->get('countTasks')):
+            if (!empty($request->get('task_'.$i))) {
+                $obTask = new Tasks();
+                $obTask->todoId  = (int)$request->get('todoId');
+                $obTask->task    = $request->get('task_'.$i);
+                $obTask->status  = $request->get('taskStatus_'.$i);
+                $obTask->save();
             }
             $i++;
         endwhile;
@@ -121,6 +143,7 @@ class TodoController extends Controller
         $obTodo->delete();
         (new Tags())->where('todoId', $id)->delete();
         (new Access())->where('todoId', $id)->delete();
+        (new Tasks())->where('todoId', $id)->delete();
 
         return redirect( route(\App\Http\Controllers\PublicController::ROUTE_MAIN));
     }

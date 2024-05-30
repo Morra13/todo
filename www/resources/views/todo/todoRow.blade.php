@@ -3,15 +3,24 @@
         <div class="col-md-9 order-md-2">
             <h2 class="featurette-heading fw-normal lh-1"> {{ $todo->name }} </h2>
             <p class="lead"> {{ $todo->text }} </p>
-            @if($todo['tags'])
-                @foreach($todo['tags'] as $tag)
-                    <span class="badge rounded-pill text-bg-info"> {{ "#" . $tag['tag'] }}</span>
-                @endforeach
-            @endif
+            <div>
+                @if($todo['tasks'])
+                    @foreach($todo['tasks'] as $task)
+                        <span class="badge rounded-pill @if($task['status'] == 'completed') text-bg-success @elseif($task['status'] == 'work') text-bg-primary @else text-bg-secondary @endif" title="{{ __('Задачи') }}"> {{ "#" . $task['task'] }}</span>
+                    @endforeach
+                @endif
+            </div>
+            <div>
+                @if($todo['tags'])
+                    @foreach($todo['tags'] as $tag)
+                        <span class="badge rounded-pill text-bg-info" title="{{ __('Тэги') }}"> {{ "#" . $tag['tag'] }}</span>
+                    @endforeach
+                @endif
+            </div>
             <div>
                 @if($todo['access'])
                     @foreach($todo['access'] as $access)
-                        <span class="badge rounded-pill text-bg-warning"> {{ $access['name'] }}</span>
+                        <span class="badge rounded-pill text-bg-warning" title="{{ __('Доступы') }}"> {{ $access['name'] }}</span>
                     @endforeach
                 @endif
             </div>

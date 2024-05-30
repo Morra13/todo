@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Access;
 use App\Models\Tags;
+use App\Models\Tasks;
 use App\Models\Todo;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -57,7 +58,15 @@ class PublicController extends Controller
             foreach ($arTags as $arTag) {
                 $tags[$key][] = ['tag' => $arTag->tag];
             }
-            $arTodo[$key]['tags'] = $tags[$key] ?? null;
+            $arTasks = (new Tasks())->where('todoId', $value['id'])->get();
+            foreach ($arTasks as $arTask) {
+                $tasks[$key][] = [
+                    'task'      => $arTask->task,
+                    'status'    => $arTask->status,
+                ];
+            }
+            $arTodo[$key]['tags']   = $tags[$key] ?? null;
+            $arTodo[$key]['tasks']  = $tasks[$key] ?? null;
             $obAccess = (new Access())->where('todoId', $value['id'])->get();
             foreach ($obAccess as $arAccess) {
                 $user = (new User())->where('id', $arAccess->userId)->first();
