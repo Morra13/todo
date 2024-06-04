@@ -17,7 +17,11 @@
             @endif
         </div>
         <div class="col-md-2 order-md-2">
-            <a href="{{ route(\App\Http\Controllers\Api\AccessController::ROUTE_DELETE_ACCESS, [auth()->id(), $todo['id']]) }}" class="btn btn-outline-danger">{{ __('Отказаться от доступа') }}</a>
+            <form action="{{ route(\App\Http\Controllers\Api\AccessController::ROUTE_DELETE_ACCESS, [auth()->id(), $todo['id']]) }}" method="post" autocomplete="off" enctype="multipart/form-data" class="needs-validation" id="formAddAccess" name="formAddAccess">
+                @method('post')
+                @csrf
+            <button type="submit" class="btn btn-danger rounded-circle p-2 lh-1">{{ __('Отказаться от доступа') }}</button>
+            </form>
         </div>
         <div class="col-md-3 order-md-1 d-flex align-items-center justify-content-center">
             <a href="{{ asset('storage') . '/' . ($todo->img ?? 'uploads/defaultUploadImg.png') }}" target="_blank">

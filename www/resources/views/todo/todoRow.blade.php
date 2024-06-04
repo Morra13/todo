@@ -7,7 +7,7 @@
             <div>
                 @if($todo['tasks'])
                     @foreach($todo['tasks'] as $task)
-                        <span class="badge rounded-pill @if($task['status'] == 'completed') text-bg-success @elseif($task['status'] == 'work') text-bg-primary @else text-bg-secondary @endif" title="{{ __('Задачи') }}"> {{ "#" . $task['task'] }}</span>
+                        <span class="badge rounded-pill @if($task['status'] == 'completed') text-bg-success @elseif($task['status'] == 'work') text-bg-primary @else text-bg-secondary @endif" title="{{ __('Задачи') }}"> {{ $task['task'] }}</span>
                     @endforeach
                 @endif
             </div>

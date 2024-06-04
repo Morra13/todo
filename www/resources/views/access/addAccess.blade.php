@@ -89,7 +89,7 @@
                 <div class="list-group  col-4">
                     <div class="input-group has-validation">
                         <span class="input-group-text">ID пользователя</span>
-                        <input type="text" class="form-control" id="userId" name="userId" placeholder="ID" required>
+                        <input type="text" class="form-control" id="userId" name="userId" placeholder="ID">
                     </div>
                 </div>
                 <div class="col-md-3 col-lg-3 order-md-last">
