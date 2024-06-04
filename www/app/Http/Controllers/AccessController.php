@@ -23,27 +23,31 @@ class AccessController extends Controller
      */
     public function addAccess($id)
     {
-        $arUsersText = [];
-        $arTodo = (new Todo())->where('id', $id)->first();
-        $arAccess = (new Access())->where('todoId', $arTodo->id)->get();
+        $obAccess = (new Access())->where('todoId', $id)->where('userId', auth()->user()->id)->first();
+        if ($obAccess && $obAccess->type == 'all') {
+            $arUsersText = [];
+            $arTodo = (new Todo())->where('id', $id)->first();
+            $arAccess = (new Access())->where('todoId', $arTodo->id)->get();
 
-        foreach ($arAccess as $value) {
-            $user = (new User())->where('id', $value->userId)->first();
-            $access[] = [
-                "id"        => $value['id'],
-                "userId"    => $user->id,
-                "userName"  => $user->name,
-                "type"      => $value['type'],
-            ];
+            foreach ($arAccess as $value) {
+                $user = (new User())->where('id', $value->userId)->first();
+                $access[] = [
+                    "id" => $value['id'],
+                    "userId" => $user->id,
+                    "userName" => $user->name,
+                    "type" => $value['type'],
+                ];
+            }
+
+            $arTodo['access'] = $access ?? null;
+            $arUsers = User::all()->except(auth()->id());
+
+            return view('access.addAccess', [
+                'arTodo' => $arTodo,
+                'arUsers' => $arUsers,
+            ]);
         }
-
-        $arTodo['access'] = $access ?? null;
-        $arUsers = User::all()->except(auth()->id());
-
-        return view('access.addAccess', [
-            'arTodo'    => $arTodo,
-            'arUsers'   => $arUsers,
-        ]);
+        return redirect( route(\App\Http\Controllers\PublicController::ROUTE_MAIN) );
     }
 
     /**

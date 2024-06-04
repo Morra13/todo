@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Access;
 use App\Models\Tags;
 use App\Models\Tasks;
 use App\Models\Todo;
@@ -31,30 +32,34 @@ class TodoController extends Controller
      */
     public function change($id)
     {
-        $arTag = [];
-        $arTodo     = (new Todo())->where('id', $id)->first();
-        $arTags     = (new Tags())->where('todoId', $id)->get();
-        $arTasks    = (new Tasks())->where('todoId', $id)->get();
-        if (!empty($arTags)) {
-            foreach ($arTags as $key => $value) {
-                $arTag[$key] = [
-                    "id"    => $value->id,
-                    "tag"   => $value->tag,
-                ];
+        $obAccess = (new Access())->where('todoId', $id)->where('userId', auth()->user()->id)->first();
+        if ($obAccess && $obAccess->type == 'all') {
+            $arTag = [];
+            $arTodo     = (new Todo())->where('id', $id)->first();
+            $arTags     = (new Tags())->where('todoId', $id)->get();
+            $arTasks    = (new Tasks())->where('todoId', $id)->get();
+            if (!empty($arTags)) {
+                foreach ($arTags as $key => $value) {
+                    $arTag[$key] = [
+                        "id"    => $value->id,
+                        "tag"   => $value->tag,
+                    ];
+                }
+                $arTodo['tags'] = $arTag;
             }
-            $arTodo['tags'] = $arTag;
-        }
-        if (!empty($arTasks)) {
-            foreach ($arTasks as $key => $value) {
-                $arTask[$key] = [
-                    "id"        => $value->id,
-                    "task"      => $value->task,
-                    "status"    => $value->status,
-                ];
+            if (!empty($arTasks)) {
+                foreach ($arTasks as $key => $value) {
+                    $arTask[$key] = [
+                        "id"        => $value->id,
+                        "task"      => $value->task,
+                        "status"    => $value->status,
+                    ];
+                }
+                $arTodo['tasks'] = $arTasks;
             }
-            $arTodo['tasks'] = $arTasks;
-        }
 
-        return view('todo.change', ['arTodo' => $arTodo]);
+            return view('todo.change', ['arTodo' => $arTodo]);
+        }
+        return redirect( route(\App\Http\Controllers\PublicController::ROUTE_MAIN) );
     }
 }
