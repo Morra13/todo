@@ -23,6 +23,9 @@ class PublicController extends Controller
     /** @var string  */
     const ROUTE_GUEST = 'guest';
 
+    /** @var string  */
+    const ROUTE_USER = 'user';
+
     /**
      * Index
      *
@@ -111,5 +114,15 @@ class PublicController extends Controller
     public function guest()
     {
         return view('layouts.guest');
+    }
+
+    /**
+     * User
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function user()
+    {
+        return view('user');
     }
 }

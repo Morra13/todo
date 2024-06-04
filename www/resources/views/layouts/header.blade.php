@@ -19,6 +19,11 @@
                         <li><a href="{{ route(\App\Http\Controllers\AccessController::ROUTE_MY_ACCESS) }}" class="nav-link px-2 text-white">{{ __('Мои доступы') }}</a></li>
                     @endif
                 </ul>
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <a href="{{ route(\App\Http\Controllers\PublicController::ROUTE_USER) }}" class="nav-link text-white">
+                        {{ Auth::user()->name }}
+                    </a>
+                </ul>
                 <div class="text-end">
                     <a href="{{ route(\App\Http\Controllers\Auth\AuthController::ROUTE_LOGOUT) }}" type="button" class="btn btn-warning">{{ __('Выйти') }}</a>
                 </div>
