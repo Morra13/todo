@@ -39,13 +39,10 @@ class AccessController extends Controller
 
         $arTodo['access'] = $access ?? null;
         $arUsers = User::all()->except(auth()->id());
-        foreach ($arUsers as $user) {
-            $arUsersText[] = $user['name'] ." ID: ". $user['id'];
-        }
 
         return view('access.addAccess', [
             'arTodo'    => $arTodo,
-            'sUsers'    => implode("\n", $arUsersText),
+            'arUsers'   => $arUsers,
         ]);
     }
 

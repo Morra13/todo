@@ -88,9 +88,19 @@
                 </div>
                 <div class="list-group  col-4">
                     <div class="input-group has-validation">
-                        <span class="input-group-text" title="{{ $sUsers }}">ID пользователя</span>
+                        <span class="input-group-text">ID пользователя</span>
                         <input type="text" class="form-control" id="userId" name="userId" placeholder="ID" required>
                     </div>
+                </div>
+                <div class="col-md-3 col-lg-3 order-md-last">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-primary">Пользователи</span>
+                    </h4>
+                    <ul class="list-group mb-3">
+                    @foreach($arUsers as $user)
+                            @include('access.usersRow', ['user' => $user])
+                    @endforeach
+                    </ul>
                 </div>
             </div>
             <input type="hidden" name="todoUserId" value="{{ $arTodo->userId }}">
