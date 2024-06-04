@@ -21,15 +21,11 @@
         @csrf
         <ul class="nav nav-pills flex-column mb-auto">
             <select multiple id="multiSelect" class="form-select mb-2">
-                @foreach($arAvailableTags as $arTags)
-                    @foreach($arTags as $tag)
-                        <option data-linked-checkbox="{{ $tag }}">{{ $tag }}</option>
-                    @endforeach
+                @foreach($arAvailableTags as $tag)
+                    <option data-linked-checkbox="{{ $tag }}">{{ $tag }}</option>
                 @endforeach
-                @foreach($arAvailableTags as $arTags)
-                    @foreach($arTags as $key => $tag)
-                        <input type="checkbox" id="{{ $tag }}" name="{{ $tag }}" value="{{ $key }}" hidden>
-                    @endforeach
+                @foreach($arAvailableTags as $tag)
+                    <input type="checkbox" id="{{ $tag }}" name="{{ $tag }}" value="{{ $tag }}" hidden>
                 @endforeach
             </select>
             <div class="d-flex gap-2 justify-content-center">
