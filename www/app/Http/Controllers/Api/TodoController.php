@@ -98,7 +98,7 @@ class TodoController extends Controller
 
         (new Tags())->where('todoId', (int)$request->get('todoId'))->delete();
         $i = 0;
-        while ($i <= $request->get('countTags')):
+        while ($i <= $request->get('countTag')):
             if (!empty($request->get('tag_'.$i))) {
                 $obTag = new Tags();
                 $obTag->todoId  = (int)$request->get('todoId');
