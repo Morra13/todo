@@ -2,6 +2,7 @@
     <div class="row featurette">
         <div class="col-md-9 order-md-2">
             <h2 class="featurette-heading fw-normal lh-1"> {{ $todo->name }} </h2>
+            <p class="lead"> {{ 'ID: ' . $todo->id }} </p>
             <p class="lead"> {{ $todo->text }} </p>
             <div>
                 @if($todo['tasks'])
