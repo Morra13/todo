@@ -36,12 +36,12 @@
                         <div id="wrapperTask" class="col-12">
                             <label for="task_0" class="form-label d-flex justify-content-between text-align-center align-items-center">
                                 {{ __('Задачи') }}
-                                <button type="button" class="input-group-text bg-primary" onclick="addTask()">+</button>
+                                <button type="button" class="input-group-text bg-primary" onclick="addTask('create')">+</button>
                             </label>
-                            <input type="hidden" id="countTask" name="countTask" value="0">
+                            <input type="hidden" id="countTasks" name="countTask" value="0">
                             <div id="divTask" class="input-group mb-3 d-none">
                                 <span class="input-group-text"></span>
-                                <input type="text" class="form-control" id="task" name="task" placeholder="{{ __('Задача') }}">
+                                <input type="text" class="form-control" id="task_" name="task" placeholder="{{ __('Задача') }}">
                                 <button type="button" class="input-group-text bg-danger" id="buttonDeleteTask" value="divTask" onclick="deleteTask(this)">-</button>
                             </div>
                             <div id="divTask_0" class="input-group mb-3">

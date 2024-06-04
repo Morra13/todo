@@ -39,6 +39,7 @@ class PublicController extends Controller
             $arAllTags = (new Tags())->where('todoId', $value['id'])->get(['tag']);
             foreach ($arAllTags as $value) {
                 $arAvailableTags[] = $value['tag'];
+                $arAvailableTags = array_unique($arAvailableTags);
             }
         }
         if (!empty($request->request->get('search'))) {
@@ -85,7 +86,7 @@ class PublicController extends Controller
 
         return view('index', [
             'arTodo' => $arTodo,
-            'arAvailableTags' => array_unique($arAvailableTags) ?? [],
+            'arAvailableTags' => $arAvailableTags ?? [],
         ]);
     }
 
